@@ -1,0 +1,16 @@
+with-expecter: true
+inpackage: True
+dir: mocks/{{ replaceAll .InterfaceDirRelative "internal" "internal_" }}
+mockname: "{{.InterfaceName}}"
+outpkg: "{{.PackageName}}"
+filename: "{{.InterfaceNameSnake}}.go"
+all: True
+packages:
+  github.com/d4n13l-4lf4/gomid/middleware:
+    config:
+      recursive: True
+      dir: mocks/thirdparty/middleware
+  github.com/d4n13l-4lf4/gomid-aws-example/hello:
+    config:
+      recursive: True
+      
