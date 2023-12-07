@@ -33,7 +33,7 @@ func (a *Asserter) Logf(format string, args ...any) {
 
 // FailNow asserter as failed.
 func (a *Asserter) FailNow() {
-	a.err = errors.New("fail now!")
+	a.err = errors.New("fail now")
 }
 
 // Error returns the inner error.

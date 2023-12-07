@@ -62,7 +62,7 @@ func TestAsserterFailNow(t *testing.T) {
 		t.Run(test.Name, func(t *testing.T) {
 			assertions := assert.New(t)
 			asserter := internal.NewAsserter()
-			expectedErr := errors.New("fail now!")
+			expectedErr := errors.New("fail now")
 
 			asserter.FailNow()
 

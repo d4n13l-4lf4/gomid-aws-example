@@ -22,7 +22,7 @@ func AuthenticateUser(users []string) middleware.Middleware {
 		return func(ctx context.Context, rawEvent any) (any, error) {
 			event, ok := rawEvent.(*events.APIGatewayProxyRequest)
 			if !ok {
-				return &lambda.HTTPLambdaResponse[string]{
+				return &lambda.LambdaResponse[string]{
 					Body:       "wrong request for authorization",
 					StatusCode: http.StatusForbidden,
 				}, nil
@@ -32,12 +32,12 @@ func AuthenticateUser(users []string) middleware.Middleware {
 				return strings.EqualFold(key, HeaderUsername)
 			})
 
-			username, _ := event.Headers[key]
+			username := event.Headers[key]
 
 			isKnownUser := slices.Contains(users, username)
 
 			if !isKnownUser {
-				return &lambda.HTTPLambdaResponse[string]{
+				return &lambda.LambdaResponse[string]{
 					Body:       fmt.Errorf("%s is not allowed to access this resource", username).Error(),
 					StatusCode: http.StatusForbidden,
 				}, nil

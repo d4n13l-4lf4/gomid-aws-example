@@ -61,7 +61,6 @@ func InitializeServiceTests(ctx *godog.ScenarioContext) {
 	ctx.Given("^I want to greet ([A-Za-z0-9\\s]+)$", greetingTest.wantToGreetSomeone)
 	ctx.When("^I receive a greeting request for ([A-Za-z0-9\\s]+)$", greetingTest.receiveGreetingRequest)
 	ctx.Then("^I should greet saying ([A-Za-z0-9!\\s]+)$", greetingTest.shouldGreetSaying)
-
 }
 
 func TestGreetingService(t *testing.T) {

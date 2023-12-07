@@ -10,6 +10,8 @@ coverage:
 lint: 
 	find . -name \*.go ! -path "./vendor/*" -exec gofmt -w -l {} \;
 	find . -name \*.go ! -path "./vendor/*" -exec goimports -w {} \;
+	golangci-lint run
+
 
 build: 
 	sh $(PWD)/scripts/go-build.sh --cmd-dir cmd --out-dir build
