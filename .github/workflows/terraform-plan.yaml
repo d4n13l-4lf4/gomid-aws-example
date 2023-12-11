@@ -33,7 +33,8 @@ jobs:
         run: |
           make clean
           make build
-        
+      - name: List packages
+        run: ls -l '${{ github.workspace }}/build'
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
