@@ -75,6 +75,7 @@ resource "aws_lambda_permission" "api_gtw_hello" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.gomid_aws_example_hello.function_name
+  qualifier     = module.hello_lambda_alias_refresh.lambda_alias_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_api_gateway_rest_api.hello_api.execution_arn}/*/*"
@@ -120,7 +121,7 @@ module "hello_lambda_code_deploy" {
 
   alias_name             = module.hello_lambda_alias_refresh.lambda_alias_name
   function_name          = aws_lambda_function.gomid_aws_example_hello.function_name
-  deployment_config_name = "CodeDeployDefault.LambdaAllAtOnce"
+  deployment_config_name = "CodeDeployDefault.LambdaLinear10PercentEvery1Minute"
 
   target_version = aws_lambda_function.gomid_aws_example_hello.version
   # TODO: add canary type
