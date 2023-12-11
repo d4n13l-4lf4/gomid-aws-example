@@ -7,6 +7,8 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
   CONFIG_DIRECTORY: "./"
+  GOOS: linux
+  GOARCH: arm64
 
 jobs:
   terraform:
