@@ -13,6 +13,7 @@ jobs:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Plan"
     runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'prod' || 'test' }}
     permissions:
       contents: read
       pull-requests: write
@@ -20,6 +21,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.4'
+
+      - name: Display Go version 
+        run: go version
+
+      - name: Build packages
+        shell: bash
+        run: |
+          make clean
+          make build
+      - name: List packages
+        run: ls -l '${{ github.workspace }}/build'
+        
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
