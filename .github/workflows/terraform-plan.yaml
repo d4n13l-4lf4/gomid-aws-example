@@ -13,7 +13,7 @@ jobs:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Plan"
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name == 'main' && 'prod' || 'test' }}
+    environment: ${{ startsWith(github.ref_name, 'release') && 'prod' || 'test' }}
     permissions:
       contents: read
       pull-requests: write
@@ -33,9 +33,10 @@ jobs:
         run: |
           make clean
           make build
+
       - name: List packages
         run: ls -l '${{ github.workspace }}/build'
-        
+
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload

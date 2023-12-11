@@ -32,7 +32,7 @@ OUT_DIR="${OUT_DIR:-build}"
 rm -rf $PWD/$OUT_DIR
 
 # Compile handlers
-find "$PWD/$CMD_DIR" -type 'f' -name "*.go" -print0 | while read -d $'\0' file
+find "$PWD/$CMD_DIR" -type 'f' -name '*.go' -print0 | while read -d $'\0' file
 do
     echo Compiling $file
     DIR_NAME=$(basename $(dirname $file))
