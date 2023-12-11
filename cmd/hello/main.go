@@ -22,7 +22,7 @@ type (
 func main() {
 	greeter := hello.NewGreetingController(hello.Greet)
 	chain := middleware.Wrap[Greet](
-		greeter,
+		greeter.Greet,
 	).
 		Add(auth.AuthenticateUser(allowedUsers)).
 		Build()

@@ -12,9 +12,10 @@ resource "aws_lambda_function" "gomid_aws_example_hello" {
   s3_bucket     = var.deployment_bucket
   s3_key        = local.gomid_aws_example_hello_s3_key
 
-  handler = "bootstrap"
-  runtime = "provided.al2023"
-  timeout = 29
+  handler       = "bootstrap"
+  runtime       = "provided.al2023"
+  architectures = ["arm64"]
+  timeout       = 29
 
   publish      = true
   skip_destroy = true
