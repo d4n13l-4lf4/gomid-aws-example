@@ -92,7 +92,7 @@ resource "aws_s3_object" "lambda_hello_code" {
   bucket = var.deployment_bucket
   key    = local.gomid_aws_example_hello_s3_key
   source = "${path.module}/build/hello.zip"
-  etag   = filemd5("build/hello.zip")
+  etag   = filemd5("${path.module}/build/hello.zip")
 }
 
 # Lambda alias
