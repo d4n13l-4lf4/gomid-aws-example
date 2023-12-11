@@ -106,7 +106,7 @@ module "hello_lambda_alias_refresh" {
   depends_on = [aws_lambda_function.gomid_aws_example_hello]
 
   name          = var.stage
-  refresh_alias = false
+  refresh_alias = true
   function_name = aws_lambda_function.gomid_aws_example_hello.function_name
 
   function_version = aws_lambda_function.gomid_aws_example_hello.version
@@ -124,7 +124,6 @@ module "hello_lambda_code_deploy" {
   deployment_config_name = "CodeDeployDefault.LambdaLinear10PercentEvery1Minute"
 
   target_version = aws_lambda_function.gomid_aws_example_hello.version
-  # TODO: add canary type
 
   create_app = true
   app_name   = local.service_name
