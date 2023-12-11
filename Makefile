@@ -1,10 +1,11 @@
+SHELL:=/bin/bash
 COV_FILE=$(PWD)/build/coverage.out
 
 clean: 
 	rm -rf $(PWD)/build
 
 coverage:
-	sh $(PWD)/scripts/go-coverage-test.sh --settings-file $(PWD)/scripts/go-coverage-test-settings.sh --check-coverage false
+	bash $(PWD)/scripts/go-coverage-test.sh --settings-file $(PWD)/scripts/go-coverage-test-settings.sh --check-coverage false
 	go tool cover -html=$(COV_FILE)
 
 lint: 
@@ -15,7 +16,7 @@ lint:
 
 
 build:
-	sh $(PWD)/scripts/go-build.sh --cmd-dir cmd --out-dir build
+	bash $(PWD)/scripts/go-build.sh --cmd-dir cmd --out-dir build
 
 clear-mock:
 	rm -rf mocks
