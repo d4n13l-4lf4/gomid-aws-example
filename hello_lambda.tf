@@ -62,7 +62,7 @@ resource "aws_api_gateway_integration" "lambda_hello" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "${aws_lambda_function.gomid_aws_example_hello.invoke_arn}:${var.stage}"
+  uri                     = module.hello_lambda_alias_refresh.lambda_alias_invoke_arn
 }
 
 resource "aws_api_gateway_deployment" "api_gtw_deploy_hello" {
@@ -118,10 +118,12 @@ module "hello_lambda_code_deploy" {
 
   depends_on = [module.hello_lambda_alias_refresh]
 
-  alias_name    = module.hello_lambda_alias_refresh.lambda_alias_name
-  function_name = aws_lambda_function.gomid_aws_example_hello.function_name
+  alias_name             = module.hello_lambda_alias_refresh.lambda_alias_name
+  function_name          = aws_lambda_function.gomid_aws_example_hello.function_name
+  deployment_config_name = "CodeDeployDefault.LambdaAllAtOnce"
 
   target_version = aws_lambda_function.gomid_aws_example_hello.version
+  # TODO: add canary type
 
   create_app = true
   app_name   = local.service_name
