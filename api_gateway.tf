@@ -33,7 +33,10 @@ resource "aws_api_gateway_deployment" "hello_deployment" {
   rest_api_id = aws_api_gateway_rest_api.hello_api.id
 
   triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.hello_api.body))
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_integration.lambda_hello.id,
+      aws_api_gateway_rest_api.hello_api.body
+    ]))
   }
 
   lifecycle {

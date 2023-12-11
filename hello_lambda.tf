@@ -62,7 +62,7 @@ resource "aws_api_gateway_integration" "lambda_hello" {
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.gomid_aws_example_hello.invoke_arn
+  uri                     = "${aws_lambda_function.gomid_aws_example_hello.invoke_arn}:${var.stage}"
 }
 
 resource "aws_api_gateway_deployment" "api_gtw_deploy_hello" {
@@ -94,7 +94,7 @@ resource "aws_s3_object" "lambda_hello_code" {
   bucket = var.deployment_bucket
   key    = local.gomid_aws_example_hello_s3_key
   source = "${path.module}/build/hello.zip"
-  etag   = filemd5("${path.module}/build/hello.zip")
+  etag   = filesha256("${path.module}/build/hello.zip")
 }
 
 # Lambda alias
@@ -105,6 +105,7 @@ module "hello_lambda_alias_refresh" {
   depends_on = [aws_lambda_function.gomid_aws_example_hello]
 
   name          = var.stage
+  refresh_alias = false
   function_name = aws_lambda_function.gomid_aws_example_hello.function_name
 
   function_version = aws_lambda_function.gomid_aws_example_hello.version
@@ -129,7 +130,7 @@ module "hello_lambda_code_deploy" {
   deployment_group_name   = local.hello_lambda
 
   create_deployment          = true
-  run_deployment             = false
+  run_deployment             = true
   wait_deployment_completion = false
 
 }
