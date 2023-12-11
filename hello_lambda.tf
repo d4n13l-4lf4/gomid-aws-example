@@ -106,7 +106,7 @@ module "hello_lambda_alias_refresh" {
   depends_on = [aws_lambda_function.gomid_aws_example_hello]
 
   name          = var.stage
-  refresh_alias = true
+  refresh_alias = false
   function_name = aws_lambda_function.gomid_aws_example_hello.function_name
 
   function_version = aws_lambda_function.gomid_aws_example_hello.version
