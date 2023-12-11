@@ -24,4 +24,10 @@ locals {
 
 provider "aws" {
   region = "us-west-2"
+
+  default_tags {
+    tags = {
+      ENVIRONMENT = var.stage
+    }
+  }
 }

@@ -21,6 +21,7 @@ resource "aws_lambda_function" "gomid_aws_example_hello" {
 
   source_code_hash = data.local_file.lambda_hello_code.content_base64sha256
 
+
   role = aws_iam_role.gomid_aws_example_hello_role.arn
 }
 
@@ -79,7 +80,7 @@ resource "aws_lambda_permission" "api_gtw_hello" {
 }
 
 resource "aws_cloudwatch_log_group" "gomid_aws_example_hello" {
-  name              = "/aws/lambda/${local.hello_lambda}"
+  name              = "/aws/lambda/${aws_lambda_function.gomid_aws_example_hello.function_name}"
   retention_in_days = 7
 }
 

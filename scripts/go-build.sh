@@ -28,10 +28,6 @@ done
 CMD_DIR="${CMD_DIR:-cmd}"
 OUT_DIR="${OUT_DIR:-build}"
 
-echo $CMD_DIR
-echo $OUT_DIR
-echo $PWD
-
 # Erase output directory
 rm -rf $PWD/$OUT_DIR
 
