@@ -49,7 +49,7 @@ resource "aws_api_gateway_stage" "hello_stage" {
 
 resource "aws_api_gateway_base_path_mapping" "hello_world_path_mapping" {
   api_id      = aws_api_gateway_rest_api.hello_api.id
-  stage_name  = var.stage
+  stage_name  = aws_api_gateway_stage.hello_stage.stage_name
   domain_name = local.base_domain
   base_path   = local.base_path
 }
