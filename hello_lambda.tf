@@ -9,8 +9,9 @@ data "local_file" "lambda_hello_code" {
 
 resource "aws_lambda_function" "gomid_aws_example_hello" {
   function_name = local.hello_lambda
-  s3_bucket     = var.deployment_bucket
-  s3_key        = local.gomid_aws_example_hello_s3_key
+
+  s3_bucket = aws_s3_object.lambda_hello_code.bucket
+  s3_key    = aws_s3_object.lambda_hello_code.key
 
   handler       = "bootstrap"
   runtime       = "provided.al2023"
@@ -95,7 +96,7 @@ resource "aws_s3_object" "lambda_hello_code" {
   bucket = var.deployment_bucket
   key    = local.gomid_aws_example_hello_s3_key
   source = "${path.module}/build/hello.zip"
-  etag   = filesha256("${path.module}/build/hello.zip")
+  etag   = filemd5("${path.module}/build/hello.zip")
 }
 
 # Lambda alias

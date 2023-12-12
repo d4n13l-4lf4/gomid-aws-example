@@ -10,6 +10,7 @@ env:
   TF_CLOUD_ORGANIZATION: ${{ vars.TF_CLOUD_ORG }}
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
+  TF_CLOUD_PROJECT: "${{ secrets. TF_CLOUD_PROJECT }}"
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: 'us-west-2'
@@ -22,7 +23,7 @@ jobs:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Apply"
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name == 'main' && 'prod' || 'test' }}
+    environment: ${{ github.ref_name == 'main' && 'staging' || 'test' }}
     permissions:
       contents: read
     steps:
