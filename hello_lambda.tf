@@ -117,6 +117,8 @@ module "hello_lambda_code_deploy" {
   source  = "terraform-aws-modules/lambda/aws//modules/deploy"
   version = "6.5.0"
 
+  aws_cli_command = "aws --region ${data.aws_region.current.id}"
+
   depends_on = [module.hello_lambda_alias_refresh]
 
   alias_name             = module.hello_lambda_alias_refresh.lambda_alias_name

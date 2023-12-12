@@ -6,6 +6,8 @@ locals {
 resource "aws_api_gateway_rest_api" "hello_api" {
   name        = "hello_api"
   description = "Greeting API"
+
+  disable_execute_api_endpoint = true
 }
 
 resource "aws_api_gateway_domain_name" "hello_api_domain_name" {
