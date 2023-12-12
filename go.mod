@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/aws/aws-lambda-go v1.41.0
 	github.com/cucumber/godog v0.13.0
-	github.com/d4n13l-4lf4/gomid v1.0.0-alpha.3
+	github.com/d4n13l-4lf4/gomid v1.0.0
 	github.com/samber/lo v1.39.0
 	github.com/stretchr/testify v1.8.4
 )
