@@ -16,11 +16,7 @@ jobs:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Plan"
     runs-on: ubuntu-latest
-    environment: |-
-      ${{
-        (startsWith(github.ref, 'refs/heads/release/') && 'staging')
-        || 'test'
-      }}
+    environment: ${{ startsWith(github.head_ref, 'release/') && 'staging' || 'test'}}
     permissions:
       contents: read
       pull-requests: write
