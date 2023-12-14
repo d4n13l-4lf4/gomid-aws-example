@@ -129,7 +129,7 @@ module "hello_lambda_code_deploy" {
   target_version = aws_lambda_function.gomid_aws_example_hello.version
 
   create_app = true
-  app_name   = local.service_name
+  app_name   = local.hello_lambda
 
   create_deployment_group = true
   deployment_group_name   = local.hello_lambda
