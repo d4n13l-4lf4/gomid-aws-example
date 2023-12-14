@@ -33,7 +33,6 @@ resource "aws_route53_record" "hello_api_regional_record" {
 
 resource "aws_api_gateway_deployment" "hello_deployment" {
   rest_api_id = aws_api_gateway_rest_api.hello_api.id
-  stage_name  = aws_api_gateway_stage.hello_stage.stage_name
   depends_on  = [aws_api_gateway_integration.lambda_hello]
 
   triggers = {
