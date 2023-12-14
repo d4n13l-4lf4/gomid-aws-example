@@ -9,29 +9,29 @@ An example usage of gomid. This project uses terraform to provision infrastructu
 ### Usage
 The next steps should be followed to deploy this application. 
 
-Note: this guide assumes you have an AWS account and Terraform Cloud account.
+**Note**: this guide assumes you have an AWS account and Terraform Cloud account.
 
-### Step 1: Configure terraform cloud
+#### Step 1: Configure terraform cloud
 Execute the following command to login into terraform cloud.
 ```bash
 terraform login
 ```
 
-### Step 2: Initialize terraform
+#### Step 2: Initialize terraform
 Initialize terraform.
 ```bash
 terraform init
 ```
-### Step 3: Configure a new terraform workspace
+#### Step 3: Configure a new terraform workspace
 Configure a new terraform workspace with the variables found at this repo [Terraform doc](terraform.md). Also, you wil have to setup AWS Credentials for terraform cloud remote execution.
 
-### Step 4: Terraform plan
+#### Step 4: Terraform plan
 Next, overview the creation of your resources with planning.
 ```bash
 terraform plan
 ```
 
-### Step 5: Terraform apply
+#### Step 5: Terraform apply
 Finally, apply the configuration to start this deployment.
 ```bash
 terraform apply
