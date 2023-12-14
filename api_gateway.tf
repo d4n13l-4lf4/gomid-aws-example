@@ -33,11 +33,13 @@ resource "aws_route53_record" "hello_api_regional_record" {
 
 resource "aws_api_gateway_deployment" "hello_deployment" {
   rest_api_id = aws_api_gateway_rest_api.hello_api.id
-  depends_on  = [aws_api_gateway_integration.lambda_hello]
 
   triggers = {
+    # TODO: use advanced patterns to figure out changes in API Gateway.
     redeployment = sha1(jsonencode([
-      aws_api_gateway_rest_api.hello_api.body
+      aws_api_gateway_resource.hello.id,
+      aws_api_gateway_method.hello.id,
+      aws_api_gateway_integration.lambda_hello.id,
     ]))
   }
 
@@ -60,5 +62,5 @@ resource "aws_api_gateway_base_path_mapping" "hello_world_path_mapping" {
 }
 
 output "base_url" {
-  value = aws_api_gateway_deployment.api_gtw_deploy_hello.invoke_url
+  value = aws_api_gateway_deployment.hello_deployment.invoke_url
 }
