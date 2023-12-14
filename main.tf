@@ -1,19 +1,35 @@
 terraform {
-    cloud {
-        organization = "d4n13l-4lf4"
-        workspaces {
-          name = "gomid-aws-lambda"
-        }
+  cloud {
+    # omit settings to be taken from deployment
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
 
-    required_providers {
-      aws = {
-        source = "hashicorp/aws"
-        version = "~> 5.0"
-      }
+    local = {
+      source  = "hashicorp/local"
+      version = "2.4.0"
     }
+  }
+
+  required_version = "~> 1.6.4"
+}
+
+locals {
+  service_name = "gomid-aws-example"
 }
 
 provider "aws" {
-        region = "us-east-1"
+  region = "us-west-2"
+
+  default_tags {
+    tags = {
+      ENVIRONMENT = var.stage
+    }
+  }
 }
+
+data "aws_region" "current" {}

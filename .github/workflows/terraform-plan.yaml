@@ -1,25 +1,44 @@
 name: "Terraform Plan"
 
-on:
-  pull_request:
+on: [pull_request]
 
 env:
   TF_CLOUD_ORGANIZATION: ${{ vars.TF_CLOUD_ORG }}
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+  TF_CLOUD_PROJECT: "${{ secrets. TF_CLOUD_PROJECT }}"
   TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
   CONFIG_DIRECTORY: "./"
+  GOOS: linux
+  GOARCH: arm64
 
 jobs:
   terraform:
     if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Plan"
     runs-on: ubuntu-latest
+    environment: ${{ startsWith(github.head_ref, 'release/') && 'staging' || 'test'}}
     permissions:
       contents: read
       pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.4'
+
+      - name: Display Go version 
+        run: go version
+
+      - name: Build packages
+        shell: bash
+        run: |
+          make clean
+          make build
+
+      - name: List packages
+        run: ls -l '${{ github.workspace }}/build'
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
