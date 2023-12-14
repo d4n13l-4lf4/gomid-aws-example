@@ -14,6 +14,8 @@ lint:
 	golangci-lint run
 	terraform fmt .
 
+docs:
+	terraform-docs markdown table . > terraform.md
 
 build:
 	bash $(PWD)/scripts/go-build.sh --cmd-dir cmd --out-dir build

@@ -66,12 +66,6 @@ resource "aws_api_gateway_integration" "lambda_hello" {
   uri                     = module.hello_lambda_alias_refresh.lambda_alias_invoke_arn
 }
 
-resource "aws_api_gateway_deployment" "api_gtw_deploy_hello" {
-  depends_on  = [aws_api_gateway_integration.lambda_hello]
-  rest_api_id = aws_api_gateway_rest_api.hello_api.id
-  stage_name  = aws_api_gateway_stage.hello_stage.stage_name
-}
-
 resource "aws_lambda_permission" "api_gtw_hello" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
