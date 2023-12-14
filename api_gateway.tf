@@ -1,10 +1,11 @@
 locals {
   base_domain = "api-${var.stage}.${var.domain_name}"
   base_path   = "hello"
+  api_name    = "hello-api-${var.stage}"
 }
 
 resource "aws_api_gateway_rest_api" "hello_api" {
-  name        = "hello_api"
+  name        = local.api_name
   description = "Greeting API"
 
   disable_execute_api_endpoint = true
