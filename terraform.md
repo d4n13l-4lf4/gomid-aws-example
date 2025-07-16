@@ -48,6 +48,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_acm_certificate"></a> [acm\_certificate](#input\_acm\_certificate) | ARN of public certificate for API | `string` | n/a | yes |
+| <a name="input_authorizer_id"></a> [authorizer\_id](#input\_authorizer\_id) | ID of the authorizer attached to this endpoint | `string` | n/a | yes |
 | <a name="input_deployment_bucket"></a> [deployment\_bucket](#input\_deployment\_bucket) | The deployment bucket name | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Root domain for API | `string` | n/a | yes |
 | <a name="input_route_domain_zone_id"></a> [route\_domain\_zone\_id](#input\_route\_domain\_zone\_id) | Route53 Zone ID of domain | `string` | n/a | yes |

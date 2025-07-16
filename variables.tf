@@ -22,3 +22,8 @@ variable "route_domain_zone_id" {
   type        = string
   description = "Route53 Zone ID of domain"
 }
+
+variable "authorizer_id" {
+  type        = string
+  description = "ID of the authorizer attached to this endpoint"
+}

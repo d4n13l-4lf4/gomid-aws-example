@@ -53,7 +53,8 @@ resource "aws_api_gateway_method" "hello" {
   rest_api_id   = aws_api_gateway_rest_api.hello_api.id
   resource_id   = aws_api_gateway_resource.hello.id
   http_method   = "POST"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = var.authorizer_id
 }
 
 resource "aws_api_gateway_integration" "lambda_hello" {
